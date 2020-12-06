@@ -17,40 +17,42 @@ int d[MAXV+1]; //tempo de descoberta
 int t[MAXV+1]; //tempo de término
 int a[MAXV+1]; //antecessor na árvore de busca
 int tempo; //tempo corrente durante execução do algoritmo
-
+int contador;
 void DFS_VISIT(int u){
 	c[u] = CINZA;
-	tempo++;
-	d[u] = tempo;
+	// tempo++;
+	// d[u] = tempo;
 
 	int v;
 	for(v = 1; v <= N; v++){
 		if(m[u][v] == ADJACENTE){ //se v é adjacente a u
 			if(c[v]==BRANCO){
-				a[v] = u;
+				contador++;
+				// a[v] = u;
 				DFS_VISIT(v);
 			}
 		}
 	}
 
 	c[u] = PRETO;
-	tempo++;
-	t[u] = tempo;
+	// tempo++;
+	// t[u] = tempo;
 }
 
 void DFS(int origem){
 	int u;
 	for(u = 1; u <= N; u++){
 		c[u] = BRANCO;
-		d[u] = NULO;
-		t[u] = NULO;
-		a[u] = NULO;
+		// d[u] = NULO;
+		// t[u] = NULO;
+		// a[u] = NULO;
 	}
 
 	tempo=0;
 
-	
-		DFS_VISIT(origem);
+	contador = 1;
+
+	DFS_VISIT(origem);
 	
 }
 
@@ -85,17 +87,9 @@ int main(){
 
     N=e;
     
-
     DFS(1);
-    int falha = 0;
-    int j;
-    for(j = 1; j <= e; j++){
-      if(c[j] != PRETO){
-        falha = 1;
-      }
-
-    }
-    if(falha != 1){
+    
+    if(contador == e){
         printf("Teste %d\n", cont);
         printf("normal\n\n");
     }else{
